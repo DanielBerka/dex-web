@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeX - Domů</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #121212;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav a {
+      color: #00ffe1;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      color: #00ffe1;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">🏠 Domů</a>
+      <a href="player.html">🎮 Hráč</a>
+      <a href="streamer.html">📺 Streamer</a>
+      <a href="music.html">🎵 Hudba</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Vítej, já jsem DeX</h1>
+    <p>gamer, live streamer a producent hudby. Všechny moje vášně na jednom místě.</p>
+  </section>
+
+</body>
+<script>
+    // Když se stránka načte, přidej fade-in
+    window.addEventListener("load", () => {
+      document.body.classList.add("fade-in");
+    });
+  
+    // Při kliknutí na jakýkoli odkaz uvnitř <a>, fade-out než opustíme stránku
+    document.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+  
+        // Jen pokud odkaz vede jinam, ne # nebo javascript:
+        if (href && !href.startsWith("#") && !href.startsWith("javascript")) {
+          e.preventDefault();
+          document.body.classList.remove("fade-in");
+          document.body.classList.add("fade-out");
+  
+          setTimeout(() => {
+            window.location = href;
+          }, 500); // počkej na dokončení animace
+        }
+      });
+    });
+  </script>
+  
+</html>
+<style>
+    body {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+  
+    body.fade-in {
+      opacity: 1;
+    }
+  
+    .fade-out {
+      opacity: 0 !important;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+  

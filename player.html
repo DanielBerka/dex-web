@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeX - Hráč</title>
+  <style>
+    body { background: #0f0f0f; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; }
+    header { background: #121212; padding: 1rem; text-align: center; }
+    nav a { color: #00ffe1; margin: 0 1rem; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    .content { max-width: 800px; margin: 2rem auto; padding: 1rem; }
+    h2 { color: #00ffe1; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a href="index.html">🏠 Domů</a>
+      <a href="player.html">🎮 Hráč</a>
+      <a href="streamer.html">📺 Streamer</a>
+      <a href="music.html">🎵 Hudba</a>
+    </nav>
+  </header>
+
+  <div class="content">
+    <h2>🎮 Hráč</h2>
+    <p>Hraní mě provází už od dětství. Od klasických konzolí až po nejmodernější PC tituly – každý žánr má své kouzlo. Specializuji se na kompetitivní hry jako <strong>League of Legends</strong>, <strong>Valorant</strong>
+    <p>Mým cílem je neustále se zlepšovat a přitom inspirovat ostatní hráče. Své tipy a herní momenty sdílím na streamu i sociálních sítích.</p>
+    <p>Pokud hledáš týmového hráče, který ví, kdy být klidný a kdy převzít iniciativu – jsi na správné adrese.</p>
+  </div>
+
+</body>
+<script>
+    // Když se stránka načte, přidej fade-in
+    window.addEventListener("load", () => {
+      document.body.classList.add("fade-in");
+    });
+  
+    // Při kliknutí na jakýkoli odkaz uvnitř <a>, fade-out než opustíme stránku
+    document.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+  
+        // Jen pokud odkaz vede jinam, ne # nebo javascript:
+        if (href && !href.startsWith("#") && !href.startsWith("javascript")) {
+          e.preventDefault();
+          document.body.classList.remove("fade-in");
+          document.body.classList.add("fade-out");
+  
+          setTimeout(() => {
+            window.location = href;
+          }, 500); // počkej na dokončení animace
+        }
+      });
+    });
+  </script>
+  
+</html>
+<style>
+    body {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+  
+    body.fade-in {
+      opacity: 1;
+    }
+  
+    .fade-out {
+      opacity: 0 !important;
+      transition: opacity 0.5s ease;
+    }
+  </style>
+  
