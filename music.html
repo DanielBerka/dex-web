@@ -4,13 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DeX - Hudba</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <style>
     body {
+      background: linear-gradient(to bottom, #0d0717, #120032);
+      color: #ffffff;
+      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1a042d, #2e0e49);
-      color: #e6e0ff;
       opacity: 0;
       transition: opacity 0.6s ease;
     }
@@ -25,69 +24,45 @@
     }
 
     header {
-      background: rgba(40, 10, 60, 0.9);
-      padding: 1.5rem 0;
+      background: #1a093b;
+      padding: 1rem;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.4);
     }
 
     nav a {
-      color: #c792ff;
+      color: #9f8cff;
+      margin: 0 1rem;
       text-decoration: none;
-      margin: 0 1.2rem;
-      font-weight: 600;
+      font-weight: bold;
       font-size: 1.1rem;
-      transition: all 0.3s;
     }
 
     nav a:hover {
-      color: #ffffff;
-      text-shadow: 0 0 8px #d0a5ff;
+      text-decoration: underline;
+      color: #c1b1ff;
     }
 
     .content {
       max-width: 800px;
-      margin: 3rem auto;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-      box-shadow: 0 0 20px rgba(173, 140, 255, 0.2);
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(159, 140, 255, 0.2);
     }
 
     h2 {
-      color: #e0c8ff;
-      font-size: 2.2rem;
-      text-align: center;
-      margin-bottom: 1.5rem;
-      text-shadow: 0 0 6px rgba(200, 150, 255, 0.3);
-    }
-
-    p {
-      color: #d4c5ee;
-      font-size: 1.1rem;
-      line-height: 1.6;
-      margin-bottom: 1.2rem;
+      color: #b28dff;
+      font-size: 2rem;
     }
 
     a {
-      color: #9e86ff;
-      text-decoration: underline;
-      transition: color 0.3s;
+      color: #94e0ff;
     }
 
     a:hover {
-      color: #ffffff;
-    }
-
-    @media (max-width: 600px) {
-      h2 {
-        font-size: 1.6rem;
-      }
-
-      p {
-        font-size: 1rem;
-      }
+      color: #b6f0ff;
     }
   </style>
 </head>
@@ -100,4 +75,36 @@
       <a href="streamer.html">📺 Streamer</a>
       <a href="music.html">🎵 Hudba</a>
     </nav>
-  </header
+  </header>
+
+  <div class="content">
+    <h2>🎵 Hudební tvorba</h2>
+    <p>Hudba je moje druhá vášeň. Když neválím na serverech, ponořím se do světa beatů a melodií. Tvořím vlastní tracky, remixy a kolaborace</p>
+    <p>Žánrově se pohybuji mezi <strong>rapem, dark rapem</strong>. Mým cílem je propojit atmosféru hudby s herní a osobní energií</p>
+    <p>Poslechni si moji tvorbu na <a href="https://soundcloud.com/daniel-berka-354698487/" target="_blank">SoundCloudu</a> a dej mi vědět (ještě jsem nic nevytvořil)</p>
+  </div>
+
+  <script>
+    // Při načtení stránky fade-in efekt
+    window.addEventListener("load", () => {
+      document.body.classList.add("fade-in");
+    });
+
+    // Fade-out efekt při přechodu mezi stránkami
+    document.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", function (e) {
+        const href = this.getAttribute("href");
+        if (href && !href.startsWith("#") && !href.startsWith("javascript")) {
+          e.preventDefault();
+          document.body.classList.remove("fade-in");
+          document.body.classList.add("fade-out");
+          setTimeout(() => {
+            window.location = href;
+          }, 500);
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
