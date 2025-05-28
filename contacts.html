@@ -195,7 +195,7 @@
       <a href="streamer.html">📺 Streamer</a>
       <a href="music.html">🎵 Hudba</a>
       <a href="contacts.html">📞 Kontakty</a>
-       <a href="https://www.twitch.tv/ja_jsem_dex" target="_blank" rel="noopener noreferrer">Twitch</a>
+      <a href="https://www.twitch.tv/ja_jsem_dex" target="_blank" rel="noopener noreferrer">Twitch</a>
     </nav>
   </header>
 
@@ -245,18 +245,9 @@
 
     const navLinks = document.querySelectorAll('header nav a');
 
-    // Aktivní odkaz má třepání hned po načtení stránky
-    navLinks.forEach(link => {
-      const href = link.href.split('/').pop();
-      const currentPage = window.location.href.split('/').pop();
+    // Odstraněno třepání aktivního odkazu při načtení
 
-      if (href === currentPage) {
-        link.classList.add('tremble');
-      }
-    });
-
-    // Při najetí myší na jakýkoli odkaz přidat třepání,
-    // po opuštění myši třepání odebrat u všech (včetně aktivního)
+    // Přidat třepání při najetí myší, odebrat po odjetí
     navLinks.forEach(link => {
       link.addEventListener('mouseenter', () => {
         link.classList.add('tremble');
