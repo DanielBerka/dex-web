@@ -4,13 +4,85 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DeX - Hráč</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <style>
-    body { background: #0f0f0f; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; }
-    header { background: #121212; padding: 1rem; text-align: center; }
-    nav a { color: #00ffe1; margin: 0 1rem; text-decoration: none; font-weight: bold; }
-    nav a:hover { text-decoration: underline; }
-    .content { max-width: 800px; margin: 2rem auto; padding: 1rem; }
-    h2 { color: #00ffe1; }
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a042d, #2e0e49);
+      color: #e6e0ff;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    body.fade-in {
+      opacity: 1;
+    }
+
+    .fade-out {
+      opacity: 0 !important;
+      transition: opacity 0.5s ease;
+    }
+
+    header {
+      background: rgba(40, 10, 60, 0.9);
+      padding: 1.5rem 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+    }
+
+    nav a {
+      color: #c792ff;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      text-shadow: 0 0 8px #d0a5ff;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(173, 140, 255, 0.2);
+    }
+
+    h2 {
+      color: #e0c8ff;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 6px rgba(200, 150, 255, 0.3);
+    }
+
+    p {
+      color: #d4c5ee;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+
+    strong {
+      color: #ffd6ff;
+    }
+
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -26,51 +98,31 @@
 
   <div class="content">
     <h2>🎮 Hráč</h2>
-    <p>Hraní mě provází už od dětství. Od klasických konzolí až po nejmodernější PC tituly – každý žánr má své kouzlo. Specializuji se na kompetitivní hry jako <strong>League of Legends</strong>, <strong>Valorant</strong>
+    <p>Hraní mě provází už od dětství. Od klasických konzolí až po nejmodernější PC tituly – každý žánr má své kouzlo.</p>
+    <p>Specializuji se na kompetitivní hry jako <strong>League of Legends</strong> a <strong>Valorant</strong>.</p>
     <p>Mým cílem je neustále se zlepšovat a přitom inspirovat ostatní hráče. Své tipy a herní momenty sdílím na streamu i sociálních sítích.</p>
     <p>Pokud hledáš týmového hráče, který ví, kdy být klidný a kdy převzít iniciativu – jsi na správné adrese.</p>
   </div>
 
-</body>
-<script>
-    // Když se stránka načte, přidej fade-in
+  <script>
     window.addEventListener("load", () => {
       document.body.classList.add("fade-in");
     });
-  
-    // Při kliknutí na jakýkoli odkaz uvnitř <a>, fade-out než opustíme stránku
+
     document.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", function (e) {
         const href = this.getAttribute("href");
-  
-        // Jen pokud odkaz vede jinam, ne # nebo javascript:
         if (href && !href.startsWith("#") && !href.startsWith("javascript")) {
           e.preventDefault();
           document.body.classList.remove("fade-in");
           document.body.classList.add("fade-out");
-  
           setTimeout(() => {
             window.location = href;
-          }, 500); // počkej na dokončení animace
+          }, 500);
         }
       });
     });
   </script>
-  
+
+</body>
 </html>
-<style>
-    body {
-      opacity: 0;
-      transition: opacity 0.6s ease;
-    }
-  
-    body.fade-in {
-      opacity: 1;
-    }
-  
-    .fade-out {
-      opacity: 0 !important;
-      transition: opacity 0.5s ease;
-    }
-  </style>
-  
