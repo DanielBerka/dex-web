@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="cs">
 <head>
   <meta charset="UTF-8" />
@@ -59,7 +59,6 @@
       text-shadow: 0 0 8px #d0a5ff;
     }
 
-    /* Animace třepání */
     @keyframes tremble {
       0%, 100% {
         transform: translateX(0);
@@ -201,7 +200,7 @@
 
   <div class="content">
     <h2>📞 Kontaktuj mě</h2>
-    <form id="contactForm" action="#" method="POST" novalidate>
+    <form id="contactForm" action="https://formsubmit.co/daniel_berka@seznam.cz" method="POST">
       <label for="name">Jméno</label>
       <input type="text" id="name" name="name" placeholder="Tvé jméno" required />
 
@@ -210,6 +209,10 @@
 
       <label for="message">Zpráva</label>
       <textarea id="message" name="message" placeholder="Napiš mi zprávu..." required></textarea>
+
+      <!-- Skrytá pole pro formsubmit -->
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="dekujeme.html" />
 
       <button type="submit">Odeslat</button>
     </form>
@@ -244,10 +247,6 @@
     });
 
     const navLinks = document.querySelectorAll('header nav a');
-
-    // Odstraněno třepání aktivního odkazu při načtení
-
-    // Přidat třepání při najetí myší, odebrat po odjetí
     navLinks.forEach(link => {
       link.addEventListener('mouseenter', () => {
         link.classList.add('tremble');
@@ -257,21 +256,7 @@
       });
     });
 
-    // Jednoduchá validace a alert po odeslání (demo)
-    document.getElementById('contactForm').addEventListener('submit', e => {
-      e.preventDefault();
-      const name = e.target.name.value.trim();
-      const email = e.target.email.value.trim();
-      const message = e.target.message.value.trim();
-
-      if (!name || !email || !message) {
-        alert('Prosím, vyplň všechna pole.');
-        return;
-      }
-
-      alert('Děkuji za zprávu, ozvu se co nejdříve!');
-      e.target.reset();
-    });
+    // Odstraněn vlastní submit handler, Formsubmit to řeší.
   </script>
 </body>
 </html>
