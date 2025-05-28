@@ -68,6 +68,12 @@
       z-index: 1000;
     }
 
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
     nav a {
       color: #c792ff;
       text-decoration: none;
@@ -77,9 +83,23 @@
       transition: all 0.3s;
     }
 
+    /* Přidaná animace třepání */
+    @keyframes tremble {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      20%, 60% {
+        transform: translateX(-2px);
+      }
+      40%, 80% {
+        transform: translateX(2px);
+      }
+    }
+
     nav a:hover {
       color: #ffffff;
       text-shadow: 0 0 8px #d0a5ff;
+      animation: tremble 0.3s infinite;
     }
 
     .hero {
@@ -102,13 +122,38 @@
       text-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     }
 
+    /* Responsivní styl pro mobily */
     @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav a {
+        margin: 0.5rem 0;
+        font-size: 1.3rem;
+      }
+
       .hero h1 {
         font-size: 2.5rem;
       }
 
       .hero p {
         font-size: 1.1rem;
+      }
+
+      section {
+        max-width: 90%;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+
+      section h2 {
+        font-size: 1.6rem;
+      }
+
+      section p, section ul {
+        font-size: 1rem;
       }
     }
   </style>

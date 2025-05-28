@@ -37,17 +37,44 @@
       z-index: 1000;
     }
 
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      padding: 0 1rem;
+    }
+
     nav a {
       color: #c792ff;
       text-decoration: none;
-      margin: 0 1.2rem;
+      margin: 0.5rem 1.2rem;
       font-weight: 600;
       font-size: 1.1rem;
+      white-space: nowrap;
       transition: all 0.3s;
     }
 
     nav a:hover {
       color: #ffffff;
+      text-shadow: 0 0 8px #d0a5ff;
+    }
+
+    /* Animace třepání */
+    @keyframes tremble {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      20%, 60% {
+        transform: translateX(-2px);
+      }
+      40%, 80% {
+        transform: translateX(2px);
+      }
+    }
+
+    nav a.tremble {
+      animation: tremble 0.3s infinite;
+      color: #ffffff !important;
       text-shadow: 0 0 8px #d0a5ff;
     }
 
@@ -87,6 +114,16 @@
       p {
         font-size: 1rem;
       }
+
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav a {
+        margin: 0.4rem 0;
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
@@ -117,7 +154,7 @@
     document.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", function (e) {
         const href = this.getAttribute("href");
-        if (href && !href.startsWith("#") && !href.startsWith("javascript")) {
+        if (href && !href.startsWith("#") && !href.startsWith("javascript") && !this.target) {
           e.preventDefault();
           document.body.classList.remove("fade-in");
           document.body.classList.add("fade-out");
@@ -126,6 +163,23 @@
           }, 500);
         }
       });
+    });
+
+    // Přidání třepání na odkazy v navigaci, které vedou mimo aktuální stránku
+    const navLinks = document.querySelectorAll('header nav a');
+
+    navLinks.forEach(link => {
+      const href = link.href;
+      const currentUrl = window.location.href;
+
+      if (href !== currentUrl && !href.includes("#")) {
+        link.addEventListener('mouseenter', () => {
+          link.classList.add('tremble');
+        });
+        link.addEventListener('mouseleave', () => {
+          link.classList.remove('tremble');
+        });
+      }
     });
   </script>
 
