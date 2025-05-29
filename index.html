@@ -8,6 +8,7 @@
   <style>
     body {
       margin: 0;
+      padding: 0;
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #1a042d, #2e0e49);
       color: #e6e0ff;
@@ -28,7 +29,6 @@
       position: sticky;
       top: 0;
       background: rgba(40, 10, 60, 0.9);
-      padding: 0.5rem 0;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(5px);
       z-index: 1000;
@@ -40,30 +40,33 @@
       cursor: pointer;
       font-size: 1.5rem;
       color: #c792ff;
-      transition: transform 0.3s;
+      transition: all 0.3s ease;
+      user-select: none;
     }
 
     .nav-toggle:hover {
-      transform: scale(1.2);
-      color: #fff;
+      color: #ffffff;
+      text-shadow: 0 0 8px #d0a5ff;
+      transform: scale(1.1);
     }
 
     nav {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      transition: max-height 0.4s ease;
       overflow: hidden;
+      transition: max-height 0.3s ease;
     }
 
-    nav.hidden {
+    nav.collapsed {
       max-height: 0;
+      padding: 0;
     }
 
     nav a {
       color: #c792ff;
       text-decoration: none;
-      margin: 0.5rem 1.2rem;
+      margin: 0 1.2rem;
       font-weight: 600;
       font-size: 1.1rem;
       transition: all 0.3s;
@@ -169,7 +172,7 @@
 <body>
 
   <header>
-    <div class="nav-toggle" id="toggleNav">⬆️</div>
+    <div class="nav-toggle" id="navToggle">⬆️</div>
     <nav id="mainNav">
       <a href="index.html">🏠 Domů</a>
       <a href="player.html">🎮 Hráč</a>
@@ -200,11 +203,10 @@
 
   <section class="contact">
     <h2>Kontaktuj mě</h2>
-    <p>Stačí napsat na <a href="mailto:daniel_berka@seznam.cz">daniel_berka@seznam.cz</a> nebo mě můžete sledovat na sociálních sítích.</p>
+    <p>Stačí napsat na <a href="mailto:daniel_berka@seznam.cz">daniel_berka@seznam.cz</a> nebo mě můžeš sledovat na sociálních sítích.</p>
   </section>
 
   <script>
-    // Fade efekt
     window.addEventListener("load", () => {
       document.body.classList.add("fade-in");
     });
@@ -223,15 +225,15 @@
       });
     });
 
-    // Toggle navigace
-    const toggleBtn = document.getElementById('toggleNav');
-    const nav = document.getElementById('mainNav');
-    let visible = true;
+    // Skript pro přepínání šipky a zobrazení menu
+    const navToggle = document.getElementById("navToggle");
+    const nav = document.getElementById("mainNav");
+    let collapsed = false;
 
-    toggleBtn.addEventListener('click', () => {
-      visible = !visible;
-      nav.classList.toggle('hidden');
-      toggleBtn.textContent = visible ? '⬆️' : '⬇️';
+    navToggle.addEventListener("click", () => {
+      collapsed = !collapsed;
+      nav.classList.toggle("collapsed", collapsed);
+      navToggle.textContent = collapsed ? "⬇️" : "⬆️";
     });
   </script>
 
