@@ -37,6 +37,16 @@
       z-index: 1000;
     }
 
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #c792ff;
+      font-size: 2rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
     nav {
       display: flex;
       justify-content: center;
@@ -59,17 +69,10 @@
       text-shadow: 0 0 8px #d0a5ff;
     }
 
-    /* Animace třepání */
     @keyframes tremble {
-      0%, 100% {
-        transform: translateX(0);
-      }
-      20%, 60% {
-        transform: translateX(-2px);
-      }
-      40%, 80% {
-        transform: translateX(2px);
-      }
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-2px); }
+      40%, 80% { transform: translateX(2px); }
     }
 
     nav a.tremble {
@@ -112,23 +115,28 @@
       color: #ffffff;
     }
 
-    @media (max-width: 600px) {
-      h2 {
-        font-size: 1.6rem;
-      }
-
-      p {
-        font-size: 1rem;
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
       }
 
       nav {
         flex-direction: column;
         align-items: center;
+        display: none;
+      }
+
+      nav.show {
+        display: flex;
       }
 
       nav a {
-        margin: 0.4rem 0;
+        margin: 0.6rem 0;
         font-size: 1.2rem;
+      }
+
+      header {
+        padding: 1rem;
       }
     }
   </style>
@@ -136,12 +144,13 @@
 <body>
 
   <header>
+    <button class="menu-toggle" aria-label="Menu">&#9660;</button>
     <nav>
       <a href="index.html">🏠 Domů</a>
       <a href="player.html">🎮 Hráč</a>
       <a href="streamer.html">📺 Streamer</a>
       <a href="music.html">🎵 Hudba</a>
-       <a href="contacts.html">📞 Kontakty</a>
+      <a href="contacts.html">📞 Kontakty</a>
     </nav>
   </header>
 
@@ -158,35 +167,32 @@
     });
 
     document.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", function (e) {
-        const href = this.getAttribute("href");
-        // Otevření externího odkazu v novém okně nezpůsobí fade
-        if (href && !href.startsWith("#") && !href.startsWith("javascript") && !this.target) {
+      const href = link.getAttribute("href");
+      if (href && !href.startsWith("#") && !href.startsWith("javascript") && !link.target) {
+        link.addEventListener("click", e => {
           e.preventDefault();
           document.body.classList.remove("fade-in");
           document.body.classList.add("fade-out");
-          setTimeout(() => {
-            window.location = href;
-          }, 500);
-        }
-      });
-    });
-
-    // Přidání třepání na odkazy navigace mimo aktuální stránku
-    const navLinks = document.querySelectorAll('header nav a');
-
-    navLinks.forEach(link => {
-      const href = link.href;
-      const currentUrl = window.location.href;
-
-      if (href !== currentUrl && !href.includes("#")) {
-        link.addEventListener('mouseenter', () => {
-          link.classList.add('tremble');
-        });
-        link.addEventListener('mouseleave', () => {
-          link.classList.remove('tremble');
+          setTimeout(() => window.location = href, 500);
         });
       }
+    });
+
+    // Třepání při hoveru
+    const navLinks = document.querySelectorAll('header nav a');
+    const currentUrl = window.location.href;
+    navLinks.forEach(link => {
+      if (link.href !== currentUrl && !link.href.includes("#")) {
+        link.addEventListener('mouseenter', () => link.classList.add('tremble'));
+        link.addEventListener('mouseleave', () => link.classList.remove('tremble'));
+      }
+    });
+
+    // Rozbalování menu na mobilu
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("nav");
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("show");
     });
   </script>
 

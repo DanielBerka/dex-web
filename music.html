@@ -31,18 +31,38 @@
       position: sticky;
       top: 0;
       background: rgba(40, 10, 60, 0.9);
-      padding: 1.5rem 0;
-      text-align: center;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(5px);
       z-index: 1000;
+    }
+
+    .nav-toggle {
+      text-align: right;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: #c792ff;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .nav-toggle:hover {
+      color: #ffffff;
+      text-shadow: 0 0 8px #d0a5ff;
+      transform: scale(1.1);
     }
 
     nav {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      padding: 0 1rem;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    nav.collapsed {
+      max-height: 0;
+      padding: 0;
     }
 
     nav a {
@@ -55,7 +75,6 @@
       transition: all 0.3s;
     }
 
-    /* Animace třepání */
     @keyframes tremble {
       0%, 100% {
         transform: translateX(0);
@@ -135,12 +154,13 @@
 <body>
 
   <header>
-    <nav>
+    <div class="nav-toggle" id="navToggle">⬆️</div>
+    <nav id="mainNav">
       <a href="index.html">🏠 Domů</a>
       <a href="player.html">🎮 Hráč</a>
       <a href="streamer.html">📺 Streamer</a>
       <a href="music.html">🎵 Hudba</a>
-       <a href="contacts.html">📞 Kontakty</a>
+      <a href="contacts.html">📞 Kontakty</a>
     </nav>
   </header>
 
@@ -156,7 +176,6 @@
       document.body.classList.add("fade-in");
     });
 
-    // Fade out při kliknutí na odkazy (kromě externích s target="_blank")
     document.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", function (e) {
         const href = this.getAttribute("href");
@@ -171,22 +190,26 @@
       });
     });
 
-    // Přidání třepání na odkazy v navigaci, které vedou mimo aktuální stránku
+    // Třepání u odkazů v navigaci
     const navLinks = document.querySelectorAll('header nav a');
-
     navLinks.forEach(link => {
       const href = link.href;
       const currentUrl = window.location.href;
-
-      // Pokud odkaz vede na jinou stránku než je aktuální
       if (href !== currentUrl && !href.includes("#")) {
-        link.addEventListener('mouseenter', () => {
-          link.classList.add('tremble');
-        });
-        link.addEventListener('mouseleave', () => {
-          link.classList.remove('tremble');
-        });
+        link.addEventListener('mouseenter', () => link.classList.add('tremble'));
+        link.addEventListener('mouseleave', () => link.classList.remove('tremble'));
       }
+    });
+
+    // Přepínání šipky a zobrazení menu
+    const navToggle = document.getElementById("navToggle");
+    const nav = document.getElementById("mainNav");
+    let collapsed = false;
+
+    navToggle.addEventListener("click", () => {
+      collapsed = !collapsed;
+      nav.classList.toggle("collapsed", collapsed);
+      navToggle.textContent = collapsed ? "⬇️" : "⬆️";
     });
   </script>
 

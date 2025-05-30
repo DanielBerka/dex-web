@@ -37,6 +37,16 @@
       z-index: 1000;
     }
 
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: #c792ff;
+      font-size: 2rem;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
     nav {
       display: flex;
       justify-content: center;
@@ -60,15 +70,9 @@
     }
 
     @keyframes tremble {
-      0%, 100% {
-        transform: translateX(0);
-      }
-      20%, 60% {
-        transform: translateX(-2px);
-      }
-      40%, 80% {
-        transform: translateX(2px);
-      }
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-2px); }
+      40%, 80% { transform: translateX(2px); }
     }
 
     nav a.tremble {
@@ -168,26 +172,35 @@
       color: #ffffff;
     }
 
-    @media (max-width: 600px) {
-      h2 {
-        font-size: 1.6rem;
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
       }
 
-      input[type="text"],
-      input[type="email"],
-      textarea {
-        font-size: 0.95rem;
+      nav {
+        flex-direction: column;
+        align-items: center;
+        display: none;
       }
 
-      button {
-        font-size: 1rem;
-        padding: 0.8rem 1.2rem;
+      nav.show {
+        display: flex;
+      }
+
+      nav a {
+        margin: 0.6rem 0;
+        font-size: 1.2rem;
+      }
+
+      header {
+        padding: 1rem;
       }
     }
   </style>
 </head>
 <body>
   <header>
+    <button class="menu-toggle" aria-label="Menu">&#9660;</button>
     <nav>
       <a href="index.html">🏠 Domů</a>
       <a href="player.html">🎮 Hráč</a>
@@ -203,17 +216,12 @@
     <form action="https://formsubmit.co/daniel_berka@seznam.cz" method="POST">
       <label for="name">Jméno</label>
       <input type="text" id="name" name="name" placeholder="Tvé jméno" required />
-
       <label for="email">E-mail</label>
       <input type="email" id="email" name="email" placeholder="tvuj@email.cz" required />
-
       <label for="message">Zpráva</label>
       <textarea id="message" name="message" placeholder="Napiš mi zprávu..." required></textarea>
-
-      <!-- Skrytá pole pro Formsubmit -->
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_next" value="dekujeme.html" />
-
       <button type="submit">Odeslat</button>
     </form>
 
@@ -233,27 +241,27 @@
     });
 
     document.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", function (e) {
-        const href = this.getAttribute("href");
-        if (href && !href.startsWith("#") && !href.startsWith("javascript") && !this.target) {
+      const href = link.getAttribute("href");
+      if (href && !href.startsWith("#") && !href.startsWith("javascript") && !link.target) {
+        link.addEventListener("click", e => {
           e.preventDefault();
           document.body.classList.remove("fade-in");
           document.body.classList.add("fade-out");
-          setTimeout(() => {
-            window.location = href;
-          }, 500);
-        }
-      });
+          setTimeout(() => window.location = href, 500);
+        });
+      }
     });
 
     const navLinks = document.querySelectorAll('header nav a');
     navLinks.forEach(link => {
-      link.addEventListener('mouseenter', () => {
-        link.classList.add('tremble');
-      });
-      link.addEventListener('mouseleave', () => {
-        link.classList.remove('tremble');
-      });
+      link.addEventListener('mouseenter', () => link.classList.add('tremble'));
+      link.addEventListener('mouseleave', () => link.classList.remove('tremble'));
+    });
+
+    const toggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector("nav");
+    toggle.addEventListener("click", () => {
+      nav.classList.toggle("show");
     });
   </script>
 </body>
