@@ -224,6 +224,7 @@
       <!-- Skryté inputy pro FormSubmit -->
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_next" value="dekujeme.html" />
+      <input type="hidden" name="_template" value="table" />
 
       <button type="submit">Odeslat</button>
     </form>
@@ -243,16 +244,12 @@
       document.body.classList.add("fade-in");
     });
 
-    // Zjednodušení: vypnul jsem přepisování všech <a> odkazů, aby neblokovaly formulář
-    // Pokud chceš, přidej si zpátky s podmínkou, aby se nevztahovalo na formulář
-
     const toggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector("nav");
     toggle.addEventListener("click", () => {
       nav.classList.toggle("show");
     });
 
-    // Přidáme "třesení" efekt pro odkazy
     const navLinks = document.querySelectorAll('header nav a');
     navLinks.forEach(link => {
       link.addEventListener('mouseenter', () => link.classList.add('tremble'));
