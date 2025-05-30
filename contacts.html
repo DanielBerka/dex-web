@@ -213,15 +213,18 @@
 
   <div class="content">
     <h2>📞 Kontaktuj mě</h2>
-    <form action="https://formsubmit.co/daniel_berka@seznam.cz" method="POST">
+    <form action="https://formsubmit.co/daniel_berka@seznam.cz" method="POST" autocomplete="off">
       <label for="name">Jméno</label>
       <input type="text" id="name" name="name" placeholder="Tvé jméno" required />
       <label for="email">E-mail</label>
       <input type="email" id="email" name="email" placeholder="tvuj@email.cz" required />
       <label for="message">Zpráva</label>
       <textarea id="message" name="message" placeholder="Napiš mi zprávu..." required></textarea>
+
+      <!-- Skryté inputy pro FormSubmit -->
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_next" value="dekujeme.html" />
+
       <button type="submit">Odeslat</button>
     </form>
 
@@ -240,28 +243,20 @@
       document.body.classList.add("fade-in");
     });
 
-    document.querySelectorAll("a").forEach(link => {
-      const href = link.getAttribute("href");
-      if (href && !href.startsWith("#") && !href.startsWith("javascript") && !link.target) {
-        link.addEventListener("click", e => {
-          e.preventDefault();
-          document.body.classList.remove("fade-in");
-          document.body.classList.add("fade-out");
-          setTimeout(() => window.location = href, 500);
-        });
-      }
-    });
-
-    const navLinks = document.querySelectorAll('header nav a');
-    navLinks.forEach(link => {
-      link.addEventListener('mouseenter', () => link.classList.add('tremble'));
-      link.addEventListener('mouseleave', () => link.classList.remove('tremble'));
-    });
+    // Zjednodušení: vypnul jsem přepisování všech <a> odkazů, aby neblokovaly formulář
+    // Pokud chceš, přidej si zpátky s podmínkou, aby se nevztahovalo na formulář
 
     const toggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector("nav");
     toggle.addEventListener("click", () => {
       nav.classList.toggle("show");
+    });
+
+    // Přidáme "třesení" efekt pro odkazy
+    const navLinks = document.querySelectorAll('header nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('mouseenter', () => link.classList.add('tremble'));
+      link.addEventListener('mouseleave', () => link.classList.remove('tremble'));
     });
   </script>
 </body>
